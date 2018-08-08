@@ -7,17 +7,22 @@ namespace Moneybox.App.Features
     public class WithdrawMoney
     {
         private IAccountRepository accountRepository;
-        private INotificationService notificationService;
+        private readonly INotificationServiceWrapper _notificationServiceWrapper;
+        
 
-        public WithdrawMoney(IAccountRepository accountRepository, INotificationService notificationService)
+        public WithdrawMoney(IAccountRepository accountRepository, INotificationServiceWrapper notificationServiceWrapper)
         {
             this.accountRepository = accountRepository;
-            this.notificationService = notificationService;
+            this._notificationServiceWrapper = notificationServiceWrapper;
+            
         }
 
         public void Execute(Guid fromAccountId, decimal amount)
         {
-            // TODO:
+            var from = this.accountRepository.GetAccountById(fromAccountId);
+            from.WithdrawMoney(amount);
+            _notificationServiceWrapper.SendNotifications(from);
+            this.accountRepository.Update(from);
         }
     }
 }

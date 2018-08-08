@@ -1,0 +1,12 @@
+1) Added some unit test for the features (checking if statements)
+2) Refactoring domain logic into the Account class
+	created method for WithDrawnMoney and ReceiveMoney 
+	with logic to check if this is a valid operation
+3) Add unittests for the Domain, remove duplicate testing from features unittests
+4) Created a Wrapper for the notificationservice 
+	Sends the notifications based on a flag on the account	
+5) Create units test for NotificationserviceWrapper 
+ 
+
+
+	
